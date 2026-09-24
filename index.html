@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>GERADOR VIP</title>
-  <meta name="apple-mobile-web-app-title" content="GERADOR VIP">
-  <meta name="application-name" content="GERADOR VIP">
+  <title>GERADOR VIP 2.0 - CAPITÃO SENSI</title>
+  <meta name="apple-mobile-web-app-title" content="GERADOR VIP 2.0">
+  <meta name="application-name" content="GERADOR VIP 2.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="apple-touch-icon" href="https://i.ibb.co/Q7Kv4F0g/Chat-GPT-Image-16-de-jan-de-2026-20-14-02.png">
   <link rel="icon" type="image/png" href="https://i.ibb.co/Q7Kv4F0g/Chat-GPT-Image-16-de-jan-de-2026-20-14-02.png">
@@ -22,16 +22,20 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4">
 
+  <!-- TELA DE LOGIN -->
   <div id="login-screen">
     <div class="w-full max-w-md p-8 bg-[#1a1c2c] border border-cyan-400 rounded-2xl text-center space-y-6 shadow-2xl shadow-cyan-400/20">
       <img src="https://i.ibb.co/Q7Kv4F0g/Chat-GPT-Image-16-de-jan-de-2026-20-14-02.png" class="w-32 mx-auto rounded-lg shadow-lg">
-      <h2 class="text-2xl font-bold uppercase tracking-widest text-cyan-400 italic">Acesso Restrito</h2>
+      <div>
+        <span class="bg-cyan-400/20 text-cyan-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-cyan-400/30">Versão 2.0 Vip</span>
+        <h2 class="text-2xl font-bold uppercase tracking-widest text-cyan-400 italic mt-2">Acesso Restrito</h2>
+      </div>
       <p class="text-gray-400">Insira sua chave de acesso VIP</p>
       
       <input id="senha-input" type="password" placeholder="Digite a senha..." class="w-full px-4 py-3 bg-black border border-cyan-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400 text-center text-xl text-white">
       
       <button id="btn-login" onclick="verificarAcesso()" class="w-full py-3 bg-cyan-400 hover:bg-cyan-500 rounded-lg font-bold transition flex justify-center items-center text-black">
-        <span id="btn-text">ENTRAR NO GERADOR</span>
+        <span id="btn-text">ENTRAR NO GERADOR 2.0</span>
       </button>
 
       <p id="status-msg" class="font-bold text-lg hidden"></p>
@@ -47,12 +51,16 @@
     </div>
   </div>
 
+  <!-- CONTEÚDO PRINCIPAL -->
   <div id="conteudo-gerador" class="hidden w-full max-w-2xl space-y-8 pb-10">
     <div class="text-center mb-8">
       <img src="https://i.ibb.co/Q7Kv4F0g/Chat-GPT-Image-16-de-jan-de-2026-20-14-02.png" alt="Logo" class="w-40 mx-auto rounded-xl shadow-lg shadow-cyan-400/20">
-      <h1 class="text-3xl font-bold mt-4 italic uppercase text-cyan-400">Gerador de Sensibilidade</h1>
+      <div class="mt-4">
+        <h1 class="text-3xl font-bold mt-2 italic uppercase text-cyan-400">Gerador de Sensibilidade 2.0</h1>
+      </div>
     </div>
 
+    <!-- SELEÇÃO DE SISTEMA -->
     <div class="bg-[#1a1c2c] border border-gray-700/50 rounded-xl p-6">
       <label class="block text-lg font-medium mb-4 italic">SISTEMA OPERACIONAL</label>
       <div class="flex bg-black/30 rounded-lg p-1">
@@ -61,27 +69,36 @@
       </div>
     </div>
 
-    <div class="bg-[#1a1c2c] border border-gray-700/50 rounded-xl p-6">
+    <!-- MODELO DO APARELHO COM AUTOCOMPLETE -->
+    <div class="bg-[#1a1c2c] border border-gray-700/50 rounded-xl p-6 relative">
       <label class="block text-lg font-medium mb-4 italic">MODELO DO CELULAR</label>
-      <input id="modelo" type="text" placeholder="Ex: Galaxy S23, iPhone 14" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-lg focus:ring-2 focus:ring-cyan-400 text-white">
+      <input id="modelo" type="text" autocomplete="off" placeholder="Ex: ROG Phone 8, RedMagic 9 Pro, Poco X8 Pro, Galaxy S25..." class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-lg focus:ring-2 focus:ring-cyan-400 text-white">
+      
+      <!-- CAIXA DE SUGESTÕES -->
+      <div id="suggestions" class="hidden absolute left-6 right-6 top-[100%] bg-[#1a1c2c] border border-cyan-400/50 rounded-b-lg shadow-xl z-50 max-h-60 overflow-y-auto"></div>
     </div>
 
+    <!-- NÍVEL -->
     <div class="bg-[#1a1c2c] border border-gray-700/50 rounded-xl p-6">
       <label class="block text-lg font-medium mb-4 italic">ESCOLHA O NÍVEL</label>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <button onclick="gerar('Baixa')" class="bg-cyan-400 hover:bg-cyan-500 py-5 rounded-lg font-bold text-xl transition hover:scale-105 text-black">BAIXA</button>
-        <button onclick="gerar('Média')" class="bg-cyan-400 hover:bg-cyan-500 py-5 rounded-lg font-bold text-xl transition hover:scale-105 text-black">MÉDIA</button>
-        <button onclick="gerar('Alta')" class="bg-cyan-400 hover:bg-cyan-500 py-5 rounded-lg font-bold text-xl transition hover:scale-105 text-black">ALTA</button>
+      <div id="grid-niveis" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <button onclick="gerar('Baixa')" class="bg-cyan-400 hover:bg-cyan-500 py-4 rounded-lg font-bold text-lg transition hover:scale-105 text-black">BAIXA</button>
+        <button onclick="gerar('Média')" class="bg-cyan-400 hover:bg-cyan-500 py-4 rounded-lg font-bold text-lg transition hover:scale-105 text-black">MÉDIA</button>
+        <button onclick="gerar('Alta')" class="bg-cyan-400 hover:bg-cyan-500 py-4 rounded-lg font-bold text-lg transition hover:scale-105 text-black">ALTA</button>
+        <button id="btn-sem-dpi" onclick="gerar('Sem DPI')" class="bg-cyan-400 hover:bg-cyan-500 py-4 rounded-lg font-bold text-lg transition hover:scale-105 text-black">SEM DPI</button>
       </div>
     </div>
 
+    <!-- LOADING ANIMATION -->
     <div id="loading" class="hidden text-center py-12">
       <div class="w-16 h-16 border-4 border-gray-600 border-t-cyan-400 rounded-full animate-spin mx-auto"></div>
-      <p class="mt-6 text-2xl text-cyan-400 font-bold italic">GERANDO SENSIBILIDADE...</p>
+      <p class="mt-6 text-2xl text-cyan-400 font-bold italic">ANALISANDO APARELHO E GERANDO SENSI 2.0...</p>
     </div>
 
+    <!-- RESULTADO -->
     <div id="resultado" class="hidden space-y-6"></div>
 
+    <!-- FOOTER -->
     <div class="text-center pt-8 border-t border-gray-800">
       <p class="text-sm text-gray-400 mb-4 font-bold uppercase tracking-widest italic text-cyan-400">Capitão Sensi - Oficial</p>
       <div class="flex justify-center gap-8 text-3xl">
@@ -94,7 +111,7 @@
 
   <script>
     async function verificarAcesso() {
-      const senhaCorreta = "VIP999"; 
+      const senhaCorreta = "VIP222"; 
       const entrada = document.getElementById('senha-input').value;
       const statusMsg = document.getElementById('status-msg');
       const btnText = document.getElementById('btn-text');
@@ -112,13 +129,78 @@
         statusMsg.innerText = "SENHA INCORRETA!";
         statusMsg.className = "font-bold text-lg text-red-500 mt-4";
         statusMsg.classList.remove('hidden');
-        btnText.innerText = "ENTRAR NO GERADOR";
+        btnText.innerText = "ENTRAR NO GERADOR 2.0";
       }
     }
 
     let os = 'Android';
-    document.getElementById('androidBtn').onclick = () => { os = 'Android'; trocar('androidBtn','iosBtn'); }
-    document.getElementById('iosBtn').onclick = () => { os = 'iOS'; trocar('iosBtn','androidBtn'); }
+
+    const aparelhosAndroid = [
+      "ROG Phone 9 Pro", "ROG Phone 9", "ROG Phone 8 Pro", "ROG Phone 8", "ROG Phone 7 Ultimate", "ROG Phone 7", "ROG Phone 6", "ROG Phone 5",
+      "RedMagic 10 Pro+", "RedMagic 10 Pro", "RedMagic 9S Pro", "RedMagic 9 Pro", "RedMagic 8S Pro", "RedMagic 8 Pro", "RedMagic 7", "RedMagic 6",
+      "OnePlus 13", "OnePlus 12", "OnePlus 11", "OnePlus 10 Pro", "OnePlus 9 Pro", "OnePlus Nord 4", "OnePlus Nord 3", "OnePlus Nord CE 3",
+      "Google Pixel 9 Pro XL", "Google Pixel 9 Pro", "Google Pixel 9", "Google Pixel 8 Pro", "Google Pixel 8", "Google Pixel 7 Pro", "Google Pixel 7", "Google Pixel 6",
+      "Xiaomi 15", "Xiaomi 15 Pro", "Xiaomi 15 Ultra", "Xiaomi 14", "Xiaomi 14 Pro", "Xiaomi 14 Ultra", "Xiaomi 14 Civi",
+      "Xiaomi 14T", "Xiaomi 14T Pro", "Xiaomi 13T", "Xiaomi 13T Pro", "Xiaomi 13 Lite", "Xiaomi 12T Pro", "Xiaomi Mi 11",
+      "Poco X8", "Poco X8 Pro", "Poco X8 Pro Max", "Poco X7", "Poco X7 Pro", "Poco X6", "Poco X6 Pro", "Poco X5", "Poco X5 Pro", "Poco X3 NFC", "Poco X3 Pro",
+      "Poco F7", "Poco F7 Pro", "Poco F7 Ultra", "Poco F6", "Poco F6 Pro", "Poco F5", "Poco F4", "Poco M7", "Poco M7 Pro", "Poco M6 Pro", "Poco M5", "Poco M3",
+      "Redmi Note 14 4G", "Redmi Note 14 5G", "Redmi Note 14 Pro", "Redmi Note 14 Pro+", "Redmi Note 13", "Redmi Note 13 Pro", "Redmi Note 13 Pro+", "Redmi Note 12", "Redmi Note 11", "Redmi Note 10", "Redmi Note 9", "Redmi Note 8",
+      "Redmi 14C", "Redmi 13", "Redmi 13C", "Redmi 12", "Redmi 10C", "Redmi 9A", "Redmi 9C", "Redmi 8A", "Redmi 7A", "Black Shark 5",
+      "Galaxy S26 Ultra", "Galaxy S26", "Galaxy S25", "Galaxy S25 FE", "Galaxy S25 Ultra", "Galaxy S24", "Galaxy S24 FE", "Galaxy S24 Ultra", "Galaxy S23", "Galaxy S23 FE", "Galaxy S23 Ultra", "Galaxy S22", "Galaxy S22 Ultra", "Galaxy S21 FE", "Galaxy S20 FE",
+      "Galaxy Z Fold 6", "Galaxy Z Flip 6",
+      "Galaxy A57", "Galaxy A56", "Galaxy A55", "Galaxy A54", "Galaxy A53", "Galaxy A52", "Galaxy A52s", "Galaxy A51", "Galaxy A50",
+      "Galaxy A37", "Galaxy A36", "Galaxy A35", "Galaxy A34", "Galaxy A33", "Galaxy A32", "Galaxy A31", "Galaxy A30",
+      "Galaxy A27", "Galaxy A25", "Galaxy A24", "Galaxy A23", "Galaxy A22", "Galaxy A21s", "Galaxy A20", "Galaxy A20s",
+      "Galaxy A16", "Galaxy A15", "Galaxy A14", "Galaxy A13", "Galaxy A12", "Galaxy A11", "Galaxy A10", "Galaxy A10s",
+      "Galaxy A05", "Galaxy A05s", "Galaxy A04e", "Galaxy A04s", "Galaxy A03", "Galaxy A03 Core", "Galaxy A02", "Galaxy A01",
+      "Galaxy J4", "Galaxy J5", "Galaxy J7", "Galaxy M55", "Galaxy M54", "Galaxy M35", "Galaxy M34", "Galaxy M23", "Galaxy M14",
+      "Moto Edge 70", "Moto Edge 60", "Moto Edge 60 Pro", "Moto Edge 50 Pro", "Moto Edge 50 Ultra", "Moto Edge 40", "Moto Edge 30", "Moto Edge 30 Neo", "Moto Edge 20", "Moto Edge",
+      "Moto G86", "Moto G85", "Moto G84", "Moto G73", "Moto G72", "Moto G71", "Moto G60", "Moto G55", "Moto G54", "Moto G53", "Moto G52", "Moto G51", "Moto G50",
+      "Moto G47", "Moto G41", "Moto G35", "Moto G34", "Moto G32", "Moto G31", "Moto G30", "Moto G24", "Moto G24 Power", "Moto G23", "Moto G22", "Moto G20", "Moto G14", "Moto G10",
+      "Moto G9 Plus", "Moto G9 Power", "Moto G9 Play", "Moto G8", "Moto G8 Power", "Moto G8 Play", "Moto G7", "Moto G7 Power", "Moto G7 Play", "Moto G6", "Moto G6 Play", "Moto G5", "Moto G4",
+      "Moto E40", "Moto E32", "Moto E22", "Moto E20", "Moto E13", "Moto E7", "Moto E7 Power", "Moto E6i", "Moto E5",
+      "LG K10", "LG K11+", "LG K12+", "LG K22", "LG K22+", "LG K40S", "LG K41S", "LG K50S", "LG K51S", "LG K52", "LG K61", "LG K62", "LG K71", "LG Velvet",
+      "Infinix GT 30 Pro", "Infinix GT 20 Pro", "Infinix GT 10 Pro", "Infinix Note 40 Pro", "Infinix Note 30 5G", "Infinix Note 12",
+      "Infinix Hot 40 Pro", "Infinix Hot 30", "Infinix Hot 30i", "Infinix Hot 20i", "Infinix Hot 12i", "Infinix Hot 11S", "Infinix Hot 11", "Infinix Hot 10i", "Infinix Smart 7",
+      "Realme GT 6", "Realme GT Neo 3", "Realme 12 Pro+", "Realme 11 5G", "Realme 10", "Realme 9", "Realme 8i",
+      "Realme C55", "Realme C53", "Realme C35", "Realme C33", "Realme C30", "Realme C21Y", "Realme C11",
+      "Multilaser G Fit", "Multilaser G Max", "Multilaser G Pro", "Multilaser H"
+    ];
+
+    const aparelhosIOS = [
+      "iPhone 7", "iPhone 7 Plus", "iPhone 8", "iPhone 8 Plus", "iPhone X", "iPhone XR", "iPhone XS", "iPhone XS Max",
+      "iPhone 11", "iPhone 11 Pro", "iPhone 11 Pro Max",
+      "iPhone 12 Mini", "iPhone 12", "iPhone 12 Pro", "iPhone 12 Pro Max",
+      "iPhone 13 Mini", "iPhone 13", "iPhone 13 Pro", "iPhone 13 Pro Max",
+      "iPhone 14", "iPhone 14 Plus", "iPhone 14 Pro", "iPhone 14 Pro Max",
+      "iPhone 15", "iPhone 15 Plus", "iPhone 15 Pro", "iPhone 15 Pro Max",
+      "iPhone 16", "iPhone 16 Plus", "iPhone 16 Pro", "iPhone 16 Pro Max",
+      "iPhone 17", "iPhone 17 Air", "iPhone 17 Pro", "iPhone 17 Pro Max"
+    ];
+
+    const inputModelo = document.getElementById('modelo');
+    const suggestionsBox = document.getElementById('suggestions');
+    const btnSemDpi = document.getElementById('btn-sem-dpi');
+
+    document.getElementById('androidBtn').onclick = () => { 
+      os = 'Android'; 
+      trocar('androidBtn','iosBtn'); 
+      inputModelo.placeholder = "Ex: ROG Phone 8, RedMagic 9 Pro, Poco X8 Pro, Galaxy S25...";
+      inputModelo.value = "";
+      btnSemDpi.style.display = 'block'; // Mostra o botão Sem DPI no Android
+      document.getElementById('grid-niveis').className = "grid grid-cols-2 sm:grid-cols-4 gap-3";
+      atualizarAutocomplete(); 
+    }
+    
+    document.getElementById('iosBtn').onclick = () => { 
+      os = 'iOS'; 
+      trocar('iosBtn','androidBtn'); 
+      inputModelo.placeholder = "Ex: iPhone 13, iPhone 15 Pro, iPhone 17 Pro Max...";
+      inputModelo.value = "";
+      btnSemDpi.style.display = 'none'; // Esconde o botão Sem DPI no iOS
+      document.getElementById('grid-niveis').className = "grid grid-cols-3 gap-3";
+      atualizarAutocomplete(); 
+    }
 
     function trocar(ativo, inativo) {
       document.getElementById(ativo).classList.add('bg-cyan-400','text-black');
@@ -127,19 +209,116 @@
       document.getElementById(inativo).classList.add('text-gray-400');
     }
 
+    function atualizarAutocomplete() {
+      const valor = inputModelo.value.toLowerCase().trim();
+      suggestionsBox.innerHTML = '';
+
+      if (!valor) {
+        suggestionsBox.classList.add('hidden');
+        return;
+      }
+
+      const listaAtual = os === 'Android' ? aparelhosAndroid : aparelhosIOS;
+      const filtrados = listaAtual.filter(item => item.toLowerCase().includes(valor));
+
+      if (filtrados.length > 0) {
+        filtrados.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'px-4 py-3 hover:bg-cyan-400 hover:text-black cursor-pointer font-bold border-b border-gray-700/50 last:border-0';
+          div.innerText = item;
+          div.onclick = function() {
+            inputModelo.value = item;
+            suggestionsBox.classList.add('hidden');
+          };
+          suggestionsBox.appendChild(div);
+        });
+        suggestionsBox.classList.remove('hidden');
+      } else {
+        suggestionsBox.classList.add('hidden');
+      }
+    }
+
+    inputModelo.addEventListener('input', atualizarAutocomplete);
+
+    document.addEventListener('click', function(e) {
+      if (e.target !== inputModelo && e.target !== suggestionsBox) {
+        suggestionsBox.classList.add('hidden');
+      }
+    });
+
     function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
     function randFloat(min, max, dec) { return parseFloat((Math.random() * (max - min) + min).toFixed(dec)); }
     function escolha(arr) { return arr[rand(0, arr.length-1)]; }
 
+    function detectarHardware(modeloTxt) {
+      const txt = modeloTxt.toLowerCase().trim();
+
+      if (os === 'iOS' || txt.includes('iphone')) {
+        if (txt.includes('pro')) {
+          return {
+            categoria: "iOS Pro Performance 🍎🚀",
+            taxaHz: "ProMotion 120 Hz (Ajuste Automático do iOS)",
+            respostaToque: "Otimizada de Alta Precisão"
+          };
+        } else {
+          return {
+            categoria: "iOS Padrão 🍎",
+            taxaHz: "60 Hz (Padrão do Dispositivo iOS)",
+            respostaToque: "Otimizada iOS"
+          };
+        }
+      }
+      
+      if (
+        txt.includes('a01') || txt.includes('a02') || txt.includes('a03') || txt.includes('a04') || txt.includes('a05') ||
+        txt.includes('a10') || txt.includes('a11') || txt.includes('a12') || txt.includes('a13') || txt.includes('a14') || txt.includes('a16') ||
+        txt.includes('a20') || txt.includes('a21') || txt.includes('moto e') || txt.includes('g10') || txt.includes('g14') || txt.includes('g20') || txt.includes('g22') || txt.includes('g24') ||
+        txt.includes('10c') || txt.includes('9a') || txt.includes('9c') || txt.includes('8a') || txt.includes('7a') || txt.includes('14c') || txt.includes('13c') ||
+        txt.includes('lg') || txt.includes('hot 10') || txt.includes('hot 11') || txt.includes('hot 12') || txt.includes('hot 20') || txt.includes('c11') || txt.includes('c21') || txt.includes('c30') || txt.includes('j4') || txt.includes('j5') || txt.includes('j7') || txt.includes('multilaser')
+      ) {
+        return {
+          categoria: "Linha de Entrada / Básico 📱",
+          taxaHz: "60 Hz (Padrão do Celular)",
+          respostaToque: "Normal"
+        };
+      }
+
+      if (txt.includes('poco') || txt.includes('rog') || txt.includes('redmagic') || txt.includes('black shark') || txt.includes('ultra') || txt.includes('s22 ultra') || txt.includes('s23') || txt.includes('s24') || txt.includes('s25') || txt.includes('s26') || txt.includes('fe') || txt.includes('xiaomi 14') || txt.includes('xiaomi 15') || txt.includes('gt 20') || txt.includes('gt 30') || txt.includes('oneplus 1') || txt.includes('pixel 8') || txt.includes('pixel 9')) {
+        return {
+          categoria: "Alta Performance / Gamer 🚀",
+          taxaHz: "120 Hz / 144 Hz (Ativar nas Configurações de Tela)",
+          respostaToque: "Ultra Rápida (Ativada)"
+        };
+      }
+      else if (txt.includes('redmi note') || txt.includes('moto g') || txt.includes('a32') || txt.includes('a33') || txt.includes('a34') || txt.includes('a35') || txt.includes('a36') || txt.includes('a37') || txt.includes('a52') || txt.includes('a53') || txt.includes('a54') || txt.includes('a55') || txt.includes('a56') || txt.includes('a57') || txt.includes('a73') || txt.includes('m34') || txt.includes('m35') || txt.includes('m54') || txt.includes('m55') || txt.includes('gt') || txt.includes('edge') || txt.includes('13t') || txt.includes('14t') || txt.includes('nord')) {
+        return {
+          categoria: "Performance Intermediária ⚡",
+          taxaHz: "90 Hz / 120 Hz (Recomendado)",
+          respostaToque: "Otimizada"
+        };
+      }
+      else {
+        return {
+          categoria: "Linha Padrão / Entrada 📱",
+          taxaHz: "60 Hz (Padrão do Sistema)",
+          respostaToque: "Normal"
+        };
+      }
+    }
+
     async function gerar(nivel) {
-      const modelo = document.getElementById('modelo').value.trim() || (os === 'Android' ? 'Android' : 'iPhone');
+      const inputModeloTxt = document.getElementById('modelo').value.trim();
+      const modelo = inputModeloTxt || (os === 'Android' ? 'Android' : 'iPhone');
+      const specs = detectarHardware(modelo);
+
       document.getElementById('loading').classList.remove('hidden');
       document.getElementById('resultado').classList.add('hidden');
-      await new Promise(r => setTimeout(r, 4000));
+      await new Promise(r => setTimeout(r, 3500));
 
-      const base = nivel === 'Baixa' ? {g:rand(70,100),pv:rand(70,100),m2:rand(70,100),m4:rand(70,100),awm:rand(15,25),ol:rand(50,70),bt:rand(65,80), dpi:rand(410,520)}
-                 : nivel === 'Média' ? {g:rand(120,150),pv:rand(120,150),m2:rand(120,150),m4:rand(120,150),awm:rand(25,35),ol:rand(60,80),bt:rand(60,75), dpi:rand(450,610)}
-                                     : {g:rand(130,200),pv:rand(130,200),m2:rand(130,200),m4:rand(130,200),awm:rand(35,45),ol:rand(70,90),bt:rand(55,70), dpi:rand(620,740)};
+      const base = nivel === 'Baixa' ? {g:rand(90,130),pv:rand(130,180),m2:rand(130,170),m4:rand(130,180),awm:rand(30,75),ol:rand(50,90),bt:rand(50,70), dpi:rand(410,520)}
+                 : nivel === 'Média' ? {g:rand(120,160),pv:rand(130,170),m2:rand(130,150),m4:rand(130,160),awm:rand(25,35),ol:rand(60,80),bt:rand(50,75), dpi:rand(450,610)}
+                 : nivel === 'Alta'  ? {g:rand(130,200),pv:rand(150,200),m2:rand(150,200),m4:rand(150,200),awm:rand(35,45),ol:rand(70,90),bt:rand(51,70), dpi:rand(620,820)}
+                                     : {g:rand(170,200),pv:rand(180,200),m2:rand(180,200),m4:rand(180,200),awm:rand(40,80),ol:rand(60,75),bt:rand(35,62), dpi: 'Padrão do Aparelho (Sem DPI)'};
 
       const config = os === 'Android' ? {
         geral: base.g, pontoVermelho: base.pv, mira2x: base.m2, mira4x: base.m4, miraAWM: base.awm, olhadinha: base.ol, botaoAtirar: base.bt,
@@ -170,13 +349,29 @@
       };
 
       document.getElementById('resultado').innerHTML = `
-        <div class="bg-[#1a1c2c] border border-gray-700/50 rounded-xl p-8 text-center">
-          <h2 class="text-3xl font-bold mb-2 text-cyan-400 uppercase italic">Sensi ${nivel} Gerada!</h2>
-          <p class="text-xl text-gray-400">${modelo} • ${os}</p>
+        <div class="bg-[#1a1c2c] border border-cyan-400/50 rounded-xl p-8 text-center shadow-lg shadow-cyan-400/10">
+          <span class="bg-cyan-400 text-black font-bold text-xs px-3 py-1 rounded-full uppercase tracking-widest">Sensi VIP 2.0</span>
+          <h2 class="text-3xl font-bold mt-2 text-cyan-400 uppercase italic">Sensi ${nivel} Gerada!</h2>
+          <p class="text-xl text-gray-300 mt-1">${modelo} • ${os}</p>
         </div>
 
+        <!-- ANÁLISE DO HARDWARE DO CELULAR -->
         <div class="bg-[#1a1c2c] border border-gray-700/50 rounded-xl p-6">
-          <h3 class="text-2xl font-bold text-cyan-400 mb-6 uppercase italic">Sensi no Jogo</h3>
+          <h3 class="text-xl font-bold text-cyan-400 mb-4 uppercase italic flex items-center gap-2">
+            <i class="fas fa-microchip"></i> Análise de Hardware do Celular
+          </h3>
+          <div class="space-y-3 text-lg">
+            <div><span class="text-gray-400">Categoria:</span> <strong>${specs.categoria}</strong></div>
+            <div><span class="text-gray-400">Taxa de Atualização:</span> <strong class="text-cyan-400">${specs.taxaHz}</strong></div>
+            <div><span class="text-gray-400">Resposta ao Toque:</span> <strong>${specs.respostaToque}</strong></div>
+          </div>
+        </div>
+
+        <!-- SENSI NO JOGO -->
+        <div class="bg-[#1a1c2c] border border-gray-700/50 rounded-xl p-6">
+          <h3 class="text-2xl font-bold text-cyan-400 mb-6 uppercase italic flex items-center gap-2">
+            <i class="fas fa-crosshairs"></i> Sensi no Jogo (Escala 200)
+          </h3>
           <div class="grid grid-cols-2 gap-6 text-xl">
             <div><span class="text-gray-400">Geral:</span> <strong>${config.geral}</strong></div>
             <div><span class="text-gray-400">P. Vermelho:</span> <strong>${config.pontoVermelho}</strong></div>
@@ -186,6 +381,11 @@
             <div><span class="text-gray-400">Olhadinha:</span> <strong>${config.olhadinha}</strong></div>
             <div class="col-span-2"><span class="text-gray-400">Botão de Tiro:</span> <strong>${config.botaoAtirar}%</strong></div>
           </div>
+
+          <!-- BOTÃO COPIAR SENSI -->
+          <button onclick="copiarSensibilidade('${config.geral}', '${config.pontoVermelho}', '${config.mira2x}', '${config.mira4x}', '${config.miraAWM}', '${config.olhadinha}', '${config.botaoAtirar}', '${config.dpi}')" class="w-full mt-6 py-3 bg-cyan-400 hover:bg-cyan-500 rounded-lg font-bold text-black transition flex justify-center items-center gap-2">
+            <i class="fas fa-copy"></i> <span id="btn-copiar-txt">COPIAR SENSIBILIDADE</span>
+          </button>
         </div>
 
         ${os === 'Android' ? `
@@ -217,6 +417,7 @@
             <div class="grid grid-cols-2 gap-6 text-xl">
               <div><span class="text-gray-400">Gestos:</span> <strong>${config.personalizarGestos}</strong></div>
               <div><span class="text-gray-400">Reduzir Atraso:</span> <strong>${config.reduzirTitulo}</strong></div>
+              <div><span class="text-gray-400">Reduzir Título:</span> <strong>${config.reduzirTitulo}</strong></div>
               <div><span class="text-gray-400">Filtrar Eventos:</span> <strong>${config.filtrarEventos}</strong></div>
             </div>
           </div>
@@ -238,6 +439,16 @@
       document.getElementById('loading').classList.add('hidden');
       document.getElementById('resultado').classList.remove('hidden');
       document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copiarSensibilidade(g, pv, m2, m4, awm, ol, bt, dpi) {
+      const texto = `🔥 SENSI GERADOR VIP 2.0 - CAPITÃO SENSI 🔥\n\n🎯 Geral: ${g}\n🔴 Ponto Vermelho: ${pv}\n🔍 Mira 2x: ${m2}\n🔍 Mira 4x: ${m4}\n🎯 Mira AWM: ${awm}\n👁️ Olhadinha: ${ol}\n🔘 Botão de Tiro: ${bt}%\n📱 DPI: ${dpi}`;
+      navigator.clipboard.writeText(texto).then(() => {
+        document.getElementById('btn-copiar-txt').innerText = "COPIADO COM SUCESSO!";
+        setTimeout(() => {
+          document.getElementById('btn-copiar-txt').innerText = "COPIAR SENSIBILIDADE";
+        }, 2500);
+      });
     }
   </script>
 </body>
