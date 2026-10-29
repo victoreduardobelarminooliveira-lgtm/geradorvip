@@ -315,9 +315,9 @@
       document.getElementById('resultado').classList.add('hidden');
       await new Promise(r => setTimeout(r, 3500));
 
-      const base = nivel === 'Baixa' ? {g:rand(90,130),pv:rand(130,180),m2:rand(130,170),m4:rand(130,180),awm:rand(30,75),ol:rand(50,90),bt:rand(50,70), dpi:rand(410,520)}
-                 : nivel === 'Média' ? {g:rand(120,160),pv:rand(130,170),m2:rand(130,150),m4:rand(130,160),awm:rand(25,35),ol:rand(60,80),bt:rand(50,75), dpi:rand(450,610)}
-                 : nivel === 'Alta'  ? {g:rand(130,200),pv:rand(150,200),m2:rand(150,200),m4:rand(150,200),awm:rand(35,45),ol:rand(70,90),bt:rand(51,70), dpi:rand(620,820)}
+      const base = nivel === 'Baixa' ? {g:rand(95,141),pv:rand(130,180),m2:rand(130,170),m4:rand(130,180),awm:rand(30,75),ol:rand(50,90),bt:rand(40,68), dpi:rand(410,520)}
+                 : nivel === 'Média' ? {g:rand(125,175),pv:rand(130,170),m2:rand(130,150),m4:rand(130,160),awm:rand(25,35),ol:rand(60,80),bt:rand(50,68), dpi:rand(450,610)}
+                 : nivel === 'Alta'  ? {g:rand(155,200),pv:rand(150,200),m2:rand(150,200),m4:rand(150,200),awm:rand(35,45),ol:rand(70,90),bt:rand(51,65), dpi:rand(620,820)}
                                      : {g:rand(170,200),pv:rand(180,200),m2:rand(180,200),m4:rand(180,200),awm:rand(40,80),ol:rand(60,75),bt:rand(35,62), dpi: 'Padrão do Aparelho (Sem DPI)'};
 
       const config = os === 'Android' ? {
